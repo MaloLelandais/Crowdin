@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TraductionController!{% endblock %}
+
+{% block body %}
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Crowdin</a>
+            <div class="collapse navbar-collapse" id="navbarColor03">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./dashboard">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./demande">Demande de traduction</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        {% if Projet|length == 0%}
+            <h3>No Translation required</h3>
+        {%endif%}
+            {% for trad_form in forms %}
+            {% if trad_form["translation"].result == ""%}
+            <div class="blockquote px-4">
+                <h3>Translation to make:</h3>
+                {{ trad_form["translation"].project}}
+                {{ form(trad_form["formView"]) }}
+            {%endif%}
+                {% if trad_form["translation"].result != "" %}<br>
+                <div id="test">
+                <p class="alert alert-success">Translation submitted</p>
+            </div>
+            {%endif%}
+                <br>
+            </div>
+            {% endfor %}
+            <script>
+                const el = document.getElementById("test")
+                setTimeout(function() { el.hidden = true }, 3000)
+            </script>
+</body>
+{% endblock %}

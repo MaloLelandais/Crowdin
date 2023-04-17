@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+{% block body %}
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Crowdin</a>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+    <ul class="navbar-nav me-auto">
+     <li class="nav-item">
+          <a class="nav-link" href="./demande">Demande de traduction</a>
+        </li>
+        {% if userLangs|length >= 2 %}
+        <li class="nav-item">
+          <a class="nav-link" href="./traduction">Pannel de traduction</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="./logout">logout</a>
+        </li>
+        </ul>
+        </div>
+        </nav>
+    <div class="container-sm d-flex my-5">
+        <div class="col px-5">
+            <h2> Add Languages </h2>
+            <br>
+            <div class="form-group">
+            {{ form(formDash) }}
+<br><br><br>
+            {% for Projettest in userProjet %}
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-striped">
+            <tr>
+                    <td>
+                    <h5>Project Id</h5>
+                    {{Projettest["projet"].id}}
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                    <h5>Project</h5>
+                    {{Projettest["projet"].project}}
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                    <h5>Project Answer</h5>
+                    {{Projettest["projet"].result}}
+                    </td>
+            </tr>
+            </table>
+            </div>
+            <br>
+            {%endfor%}
+            </div>
+        </div>
+        <div class="col px-10">
+            <h2>Your Languages</h2>
+            <hr> 
+            <br>
+            {% for lang in userLangs %} 
+            <p class="lead">{{lang}}</p>
+            <hr> 
+            {% endfor %}
+        </div>
+</div>
+</body>
+{% endblock %}
